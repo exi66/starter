@@ -49,6 +49,17 @@ Check every change with `pnpm lint && pnpm format:check && pnpm typecheck && pnp
   extending `github>exi66/starter`. Change rules in `default.json`, not per project.
 - Deploy needs two repo settings besides the workflow: Pages source "GitHub Actions" and a `v*` tag rule in the
   `github-pages` environment (otherwise the deploy job is rejected for tags).
+- Repo settings are not copied from the template. For a new project (`<repo>` = its name): Pages source, `v*` tag
+  rule, auto-merge, and two rulesets on the default branch — no force-push/deletion (no bypass) and the `check`
+  status required (admins bypass, so the owner still pushes directly; Renovate PRs wait for CI):
+  ```
+  gh api -X POST repos/exi66/<repo>/pages -f build_type=workflow
+  gh api -X POST repos/exi66/<repo>/environments/github-pages/deployment-branch-policies -f name='v*' -f type=tag
+  gh repo edit exi66/<repo> --enable-auto-merge --delete-branch-on-merge
+  gh api -X POST repos/exi66/<repo>/rulesets --input - <<< '{"name":"main: no force-push or deletion","target":"branch","enforcement":"active","conditions":{"ref_name":{"include":["~DEFAULT_BRANCH"],"exclude":[]}},"rules":[{"type":"deletion"},{"type":"non_fast_forward"}]}'
+  gh api -X POST repos/exi66/<repo>/rulesets --input - <<< '{"name":"main: CI must pass","target":"branch","enforcement":"active","conditions":{"ref_name":{"include":["~DEFAULT_BRANCH"],"exclude":[]}},"bypass_actors":[{"actor_id":5,"actor_type":"RepositoryRole","bypass_mode":"always"}],"rules":[{"type":"required_status_checks","parameters":{"strict_required_status_checks_policy":false,"required_status_checks":[{"context":"check","integration_id":15368}]}}]}'
+  ```
+  The `github-pages` environment appears after the Pages call; run the tag-rule line after it.
 - `README.md` is a short usage guide for people; implementation details belong here.
 - Commit only when asked. CI runs on pushes/PRs to `main`; tags `v*` deploy to GitHub Pages
   (`.github/workflows/pages.yml`, runs CI first).
