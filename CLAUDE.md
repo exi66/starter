@@ -47,6 +47,9 @@ Check every change with `pnpm lint && pnpm format:check && pnpm typecheck && pnp
 - `vite.config.ts` uses `base: './'`, so the build works under any `/<repo>/` path.
 - Dependency updates: Renovate. `default.json` (starter only) is the shared preset; every repo has `renovate.json`
   extending `github>exi66/starter`. Change rules in `default.json`, not per project.
+- Deploy needs two repo settings besides the workflow: Pages source "GitHub Actions" and a `v*` tag rule in the
+  `github-pages` environment (otherwise the deploy job is rejected for tags).
+- `README.md` is a short usage guide for people; implementation details belong here.
 - Commit only when asked. CI runs on pushes/PRs to `main`; tags `v*` deploy to GitHub Pages
   (`.github/workflows/pages.yml`, runs CI first).
 - Package manager: pnpm.
