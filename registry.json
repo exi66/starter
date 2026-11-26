@@ -1,0 +1,122 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "exi",
+  "homepage": "https://exi66.github.io/starter/",
+  "items": [
+    {
+      "name": "theme",
+      "type": "registry:theme",
+      "title": "Тема exi",
+      "description": "Поверх пресета b5KtPvff6 (base-sera, sky, Geist Mono): primary и графики в цвет бренда (white text ≥ AA), градиент бренда (bg-brand-gradient, text-brand-gradient), радиус 0, фокус-кольцо, курсоры.",
+      "cssVars": {
+        "light": {
+          "radius": "0",
+          "primary": "oklch(0.52 0.15 280)",
+          "primary-foreground": "oklch(0.977 0.013 280)",
+          "sidebar-primary": "oklch(0.52 0.15 280)",
+          "sidebar-primary-foreground": "oklch(0.977 0.013 280)",
+          "chart-1": "oklch(0.828 0.08 280)",
+          "chart-2": "oklch(0.685 0.13 280)",
+          "chart-3": "oklch(0.588 0.15 280)",
+          "chart-4": "oklch(0.52 0.15 280)",
+          "chart-5": "oklch(0.443 0.13 280)",
+          "brand-1": "oklch(0.736 0.189 339.7)",
+          "brand-2": "oklch(0.798 0.093 258.1)",
+          "brand-gradient-foreground": "oklch(0.145 0 0)",
+          "brand-text-1": "oklch(0.58 0.19 339.7)",
+          "brand-text-2": "oklch(0.56 0.1 258.1)"
+        },
+        "dark": {
+          "primary": "oklch(0.45 0.14 280)",
+          "primary-foreground": "oklch(0.977 0.013 280)",
+          "sidebar-primary": "oklch(0.45 0.14 280)",
+          "sidebar-primary-foreground": "oklch(0.977 0.013 280)",
+          "chart-1": "oklch(0.828 0.08 280)",
+          "chart-2": "oklch(0.685 0.13 280)",
+          "chart-3": "oklch(0.588 0.15 280)",
+          "chart-4": "oklch(0.52 0.15 280)",
+          "chart-5": "oklch(0.443 0.13 280)",
+          "brand-1": "oklch(0.736 0.189 339.7)",
+          "brand-2": "oklch(0.798 0.093 258.1)",
+          "brand-gradient-foreground": "oklch(0.145 0 0)",
+          "brand-text-1": "oklch(0.736 0.189 339.7)",
+          "brand-text-2": "oklch(0.798 0.093 258.1)"
+        },
+        "theme": {
+          "color-brand-1": "var(--brand-1)",
+          "color-brand-2": "var(--brand-2)",
+          "color-brand-gradient-foreground": "var(--brand-gradient-foreground)",
+          "animate-brand-gradient": "brand-gradient 35s ease infinite"
+        }
+      },
+      "css": {
+        "@keyframes brand-gradient": {
+          "0%, 100%": {
+            "background-position": "0% 50%"
+          },
+          "50%": {
+            "background-position": "100% 50%"
+          }
+        },
+        "@utility bg-brand-gradient": {
+          "background-image": "linear-gradient(100deg, var(--brand-1), var(--brand-2), var(--brand-1), var(--brand-2))",
+          "background-size": "800% 800%",
+          "animation": "var(--animate-brand-gradient)"
+        },
+        "@utility text-brand-gradient": {
+          "background-image": "linear-gradient(100deg, var(--brand-text-1), var(--brand-text-2), var(--brand-text-1), var(--brand-text-2))",
+          "background-size": "300% 100%",
+          "-webkit-background-clip": "text",
+          "background-clip": "text",
+          "color": "transparent",
+          "animation": "var(--animate-brand-gradient)"
+        },
+        "@media (prefers-reduced-motion: reduce)": {
+          ".bg-brand-gradient, .text-brand-gradient": {
+            "animation": "none"
+          }
+        },
+        "@layer base": {
+          "*": {
+            "outline-color": "color-mix(in oklab, var(--ring) 55%, transparent)"
+          },
+          ":focus-visible": {
+            "outline-style": "solid",
+            "outline-width": "3px",
+            "outline-offset": "0"
+          },
+          "input:focus-visible, textarea:focus-visible, select:focus-visible": {
+            "border-color": "var(--ring)",
+            "outline-offset": "0"
+          },
+          "[data-slot='scroll-area-viewport'] :focus-visible": {
+            "outline-offset": "-3px"
+          },
+          ":focus:not(:focus-visible)": {
+            "outline": "none"
+          },
+          "[tabindex='-1']:focus-visible, [role='dialog']:focus-visible": {
+            "outline": "none"
+          },
+          "button::-moz-focus-inner, [type='button']::-moz-focus-inner, [type='submit']::-moz-focus-inner": {
+            "border": "0",
+            "padding": "0"
+          },
+          ":-moz-focusring": {
+            "outline-style": "solid",
+            "outline-width": "3px"
+          },
+          ":-moz-focusring:not(:focus-visible)": {
+            "outline": "none"
+          },
+          "body": {
+            "-webkit-font-smoothing": "antialiased"
+          },
+          "button:not(:disabled), [role='button']:not(:disabled), [role='menuitem'], [role='option'], label:has(button), summary": {
+            "cursor": "pointer"
+          }
+        }
+      }
+    }
+  ]
+}

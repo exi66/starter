@@ -1,0 +1,13 @@
+{
+  "app": {
+    "title": "starter",
+    "ready": "Project is ready. Components: pnpm dlx shadcn@latest add <name>"
+  },
+  "theme": {
+    "light": "Light theme",
+    "dark": "Dark theme"
+  },
+  "language": {
+    "switch": "Language: {{lang}}"
+  }
+}
