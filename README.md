@@ -40,7 +40,7 @@ pnpm dlx shadcn@latest add @exi/theme --overwrite
 `"registries": { "@exi": "https://exi66.github.io/starter/r/{name}.json" }`, затем:
 
 ```bash
-pnpm dlx shadcn@latest apply b5KtPvff6
+pnpm dlx shadcn@latest apply b1oVxvbE
 pnpm dlx shadcn@latest add @exi/theme
 ```
 
