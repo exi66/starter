@@ -1,7 +1,11 @@
 {
   "app": {
     "title": "starter",
-    "ready": "Проект готов. Компоненты: pnpm dlx shadcn@latest add <name>"
+    "ready": "Проект готов. Компоненты: pnpm dlx shadcn@latest add <name>",
+    "components_one": "Установлен {{count}} компонент",
+    "components_few": "Установлено {{count}} компонента",
+    "components_many": "Установлено {{count}} компонентов",
+    "components_other": "Установлено {{count}} компонента"
   },
   "theme": {
     "light": "Светлая тема",

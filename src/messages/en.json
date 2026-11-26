@@ -1,7 +1,9 @@
 {
   "app": {
     "title": "starter",
-    "ready": "Project is ready. Components: pnpm dlx shadcn@latest add <name>"
+    "ready": "Project is ready. Components: pnpm dlx shadcn@latest add <name>",
+    "components_one": "{{count}} component installed",
+    "components_other": "{{count}} components installed"
   },
   "theme": {
     "light": "Light theme",

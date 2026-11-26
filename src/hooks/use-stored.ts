@@ -1,4 +1,4 @@
-import type { StandardSchemaV1 } from 'ky';
+import type { StandardSchemaV1 } from '@/lib/standard-schema';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { readStored, writeStored } from '@/lib/storage';
 

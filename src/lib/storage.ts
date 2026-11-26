@@ -1,4 +1,4 @@
-import type { StandardSchemaV1 } from 'ky';
+import type { StandardSchemaV1 } from '@/lib/standard-schema';
 import { APP_NAME } from '@/lib/app';
 
 /** Keys shared by every project on the domain on purpose; all other keys get the `<APP_NAME>:` prefix. */

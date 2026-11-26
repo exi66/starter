@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from '@/components/theme-provider';
 import { Button } from '@/components/ui/button';
-import { SUPPORTED_LANGUAGES } from '@/lib/i18n';
+import { SUPPORTED_LANGUAGES, setLanguage } from '@/lib/i18n';
 import logo from '@/assets/brand/logo.svg';
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
   const themeLabel = dark ? t('theme.light') : t('theme.dark');
 
   const lang = i18n.resolvedLanguage ?? SUPPORTED_LANGUAGES[0];
-  const nextLang = SUPPORTED_LANGUAGES[(SUPPORTED_LANGUAGES.indexOf(lang as never) + 1) % SUPPORTED_LANGUAGES.length];
+  const nextLang = SUPPORTED_LANGUAGES[(SUPPORTED_LANGUAGES.indexOf(lang) + 1) % SUPPORTED_LANGUAGES.length];
 
   useEffect(() => {
     document.title = t('app.title');
@@ -27,14 +27,16 @@ export default function App() {
         </a>
         <h1 className="font-medium">{t('app.title')}</h1>
         <div className="ml-auto flex items-center gap-1">
-          <Button
-            variant="ghost"
-            size="sm"
-            title={t('language.switch', { lang: nextLang.toUpperCase() })}
-            onClick={() => void i18n.changeLanguage(nextLang)}
-          >
-            {lang.toUpperCase()}
-          </Button>
+          {SUPPORTED_LANGUAGES.length > 1 && (
+            <Button
+              variant="ghost"
+              size="sm"
+              title={t('language.switch', { lang: nextLang.toUpperCase() })}
+              onClick={() => setLanguage(nextLang)}
+            >
+              {lang.toUpperCase()}
+            </Button>
+          )}
           <Button
             variant="ghost"
             size="icon"
@@ -50,6 +52,7 @@ export default function App() {
         <h2 className="w-fit text-brand-gradient text-3xl font-bold">exi.moe</h2>
         <div className="bg-brand-gradient p-6 text-brand-gradient-foreground">bg-brand-gradient</div>
         <p>{t('app.ready')}</p>
+        <p className="text-muted-foreground">{t('app.components', { count: 1 })}</p>
         <div className="flex gap-2">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>

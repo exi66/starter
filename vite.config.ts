@@ -15,5 +15,7 @@ export default defineConfig({
   test: {
     environment: 'node',
     include: ['test/**/*.test.ts'],
+    // i18n is initialised for tests too: code outside React translates with i18next.t().
+    setupFiles: ['src/lib/i18n.ts'],
   },
 });

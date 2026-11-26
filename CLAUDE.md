@@ -32,9 +32,20 @@ Check every change with `pnpm lint && pnpm format:check && pnpm typecheck && pnp
 - Settings: `useStored(key, init, { schema, override })` (`src/hooks/use-stored.ts`) → localStorage
   `<APP_NAME>:<key>` (`src/lib/app.ts`). Shared keys (`theme`, `i18nextLng`) are listed in `src/lib/storage.ts`.
   Pass a zod `schema` for anything non-trivial: stored values outlive code changes.
-- i18n: every user-facing string goes through `t()` (react-i18next). Source language is `src/messages/ru.json`; keys
-  are typed from it; add the same key to every language (`test/messages.test.ts` checks it). Language setup:
-  `src/lib/i18n.ts` (also keeps `<html lang>` in sync).
+- i18n: every user-facing string goes through `t()` (react-i18next) in components and `i18next.t()` in plain TS
+  (errors, workers…). Source language is `src/messages/ru.json`; keys are typed from it. Languages are discovered
+  from `src/messages/*.json`: a file with strings must have every key of ru.json (plural forms may differ — ru
+  `_one/_few/_many/_other`, en `_one/_other`), an empty file (`{}`) is a placeholder and the language is not offered
+  until it is filled; `test/messages.test.ts` checks both. Strings that are content rather than UI (game data, text
+  meant for a Russian forum) stay as they are — decide per project and note it in its CLAUDE.md.
+- `src/lib/i18n.ts` is shared by every project: keep it identical to the starter's. It reads the shared
+  `i18nextLng` (a choice made in any project), falls back to `ru` for a language the project lacks, and never writes
+  the key on its own — only `setLanguage()` (the language toggle) does, so projects with fewer languages do not
+  overwrite the user's choice. Tests initialise it via `setupFiles` in `vite.config.ts`.
+- `useStored` and `src/lib/storage.ts` take any Standard Schema validator; its type is the local
+  `src/lib/standard-schema.ts` (copied from the spec), so they do not depend on zod or ky.
+- After `pnpm add`, check `pnpm-workspace.yaml`: pnpm 12 may silently add `minimumReleaseAgeExclude` entries for
+  versions younger than a day. Remove them and use an older version (lower the range) instead.
 - Validation: zod. HTTP: ky via `api` from `src/lib/api.ts` (`api.extend({ baseUrl })` per API); validate responses
   with `.json(schema)`, never trust a raw `.json()` from an external API.
 - `src/index.css` is in `.prettierignore` on purpose: the shadcn CLI matches existing rules by text, so reformatted
